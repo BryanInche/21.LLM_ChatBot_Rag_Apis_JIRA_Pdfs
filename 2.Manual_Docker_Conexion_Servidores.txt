@@ -1,0 +1,216 @@
+##1. Instalar este cliente, para administrar el Servidor Linux, Ubuntu, etc
+Ip 192.168.5.163
+Usr: adminserver
+Psw Veeam555$$
+https://bitvise.com/ssh-client-download
+
+##2. Configuración del Servidor
+
+##2.1 Revisar las capacidades del servidor, memoria ram, GPU, ETC
+# Información detallada del CPU
+lscpu
+
+# Memoria RAM total y disponible
+free -h
+
+######################################################################################################
+# # 3.Verificar si hay GPUs NVIDIA disponibles
+# Ver si hay GPUs NVIDIA disponibles (comando debe ejecutarse EN EL SERVIDOR, no en el contenedor)
+nvidia-smi
+
+- Si muestra una tabla con la GPU: Tienes tarjeta NVIDIA y puedes usarla con Ollama.
+- Si dice command not found: No hay drivers NVIDIA instalados o no hay GPU.
+
+"""El mensaje indica que no hay drivers NVIDIA instalados en tu servidor, lo que significa que:
+No hay una GPU NVIDIA disponible en tu sistema, o
+Los drivers no están instalados (aunque físicamente exista una GPU)."""
+
+## 4.Verificar si existe hardware NVIDIA
+lspci | grep -i nvidia
+
+- Si muestra una línea con NVIDIA Corporation: Tienes una GPU pero falta instalar drivers.
+
+### 5. Instala drivers NVIDIA
+sudo apt update
+sudo apt install -y nvidia-driver-535
+sudo reboot  ## Reiniciar el servidor?
+
+- Si no muestra nada: No hay GPU NVIDIA en el servidor.
+Limita el uso de CPU en Docker (para evitar saturación):
+Edita tu docker-compose.yml:
+
+yaml
+Copy
+services:
+  ollama:
+    deploy:
+      resources:
+        limits:
+          cpus: '4'   # Usa solo 4 núcleos
+          memory: 8G  # Limita RAM (Usa modelos más pequeños y cuantizados (para CPU))
+
+## 6. Reinicia Docker:
+sudo systemctl restart docker
+
+## 7. Verifica que Ollama use la GPU:
+docker logs proyecto_llm_ms4m_ollama_1  # Busca líneas como "CUDA enabled"
+
+## 7.1 Monitoreo de Recursos
+watch -n 1 nvidia-smi
+
+# 7.2 Configura Docker para usar GPU
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+
+# 7.3 Prueba el modelo con GPU (desde dentro del contenedor)
+docker exec -it proyecto_llm_ms4m_ollama_1 ollama run mistral "Hola" --verbose
+
+
+## 7.4 Verifica el estado del módulo del kernel del GPU
+lsmod | grep nvidia
+
+## 7.5 Reiniciar el servidor(imprecendible)
+sudo reboot
+
+###############################################################################################################
+##### 8. Instalar el nvidia-container-toolkit
+
+## Sí, es necesario instalar el nvidia-container-toolkit si quieres que Ollama (u otras aplicaciones en ## ##contenedores ##Docker) aprovechen tu GPU NVIDIA.
+Cómo saber si ya está instalado? el toolkit de nvidia para correr contenedores Docker con GPU
+dpkg -l | grep nvidia-container-toolkit
+
+## Opción 1: Descargar la versión correcta manualmente
+https://github.com/NVIDIA/nvidia-container-toolkit/releases/tag/v1.17.5
+
+8.1 En "Assets", descarga:
+nvidia-container-toolkit_1.17.5_deb_amd64.tar.gz
+
+8.2 Transfiere el archivo al servidor /tmp/
+
+8.3 # Navega al directorio donde transferiste el archivo (ej. /tmp/)
+cd ~/tmp/nvidia-container-toolkit_1.17.5_deb_amd64/release-v1.17.5-stable/packages/ubuntu18.04/amd64
+
+8.4 Instala los paquetes principales (en este orden):
+sudo dpkg -i libnvidia-container1_1.17.5-1_amd64.deb \
+            libnvidia-container-tools_1.17.5-1_amd64.deb \
+            nvidia-container-toolkit-base_1.17.5-1_amd64.deb \
+            nvidia-container-toolkit_1.17.5-1_amd64.deb
+
+8.5 Soluciona dependencias faltantes:
+sudo apt --fix-broken install
+
+
+###Configuración Post-Instalación
+##9.Configura Docker para usar NVIDIA:
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+
+### Verifica la instalación:
+docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+
+## Verifica que el runtime esté activo:
+docker info | grep -i runtime
+
+## Ejecuta una prueba dentro de Docker con GPU:
+docker run --rm --gpus all nvidia/cuda:12.3.2-base-ubuntu22.04 nvidia-smi
+
+## 10.Reiniciar tus servicios de Docker Compose
+docker compose down
+docker compose up -d
+docker ps
+
+## 10.1 Si Docker no reconoce la GPU:
+sudo systemctl restart Docker # Reinicia Docker para aplicar los cambio
+docker info | grep -i runtime # Verifica que el runtime NVIDIA esté disponible
+sudo ldconfig
+Para verificar la versión instalada:
+nvidia-ctk --version
+
+
+## 11. Resumen 
+Estado Actual Validado
+Controladores NVIDIA:
+Versión: 550.120 (compatible con tu GTX 1070)
+CUDA: 12.4 (soporte completo)
+Salida de nvidia-smi correcta.
+NVIDIA Container Toolkit:
+Versión: 1.17.5 (correctamente instalada)
+
+## 11.1 Monitoreo de Uso de GPU en tiempo real
+watch -n 1 nvidia-smi
+
+
+#####################################################################################################
+12. Ingresar a un contenedor de Docker
+docker exec -it proyecto_llm_ms4m_ollama_1 bash
+
+13. Instalar modelo de OLLAMA
+ollama pull mistral
+
+# Construye las imágenes
+docker-compose build
+
+# Inicia los servicios en segundo plano
+docker-compose up -d
+
+# Verifica que todo esté corriendo
+docker-compose ps
+
+# Usar cat para ver archivos pequeños
+cat api.py
+
+
+
+14. Salir de un contenedor de Docker
+exit
+
+# Detener todos los contenedores
+docker-compose down
+
+
+15. Reiniciar un servicio de Docker(backend, frontend, etc)
+docker-compose restart ollama backend
+
+16. Validar la conexión del Backend con el Modelo OLLAMA (Desde CMD)
+curl -X POST "http://192.168.5.163:8000/respuesta_llm" -H "Content-Type: application/json" -d "{\"question\": \"¿Qué es la actividad cargando?\"}"
+
+## 17. Lista todos los contenedores (runs + detenidos). 
+docker ps -a
+
+# Eliminar contenedores individualmente
+docker rm <CONTAINER_ID_OR_NAME>
+
+
+# Construir las imágenes de Docker Correspondientes 
+docker-compose build
+
+# reconstruye la imagen sin previa memoria cache.
+docker-compose build --no-cache
+
+
+
+# Muestra logs en tiempo real
+docker-compose logs -f [servicio]
+
+
+## 18. Detiene y elimina los contenedores(En caso hayas modficado las imagenes)
+docker-compose down
+# 19. Detener y limpiar todo
+docker-compose down -v
+
+
+##Detén y limpia los contenedores anteriores
+docker-compose down -v
+
+# 20. Reconstruye la imagen sin cache
+docker-compose build --no-cache backend
+
+# 21. Inicia todos los servicios en segundo plano
+docker-compose up -d
+
+## 22. Instalar el Mistral dentro de OLLAMA
+docker-compose exec ollama ollama pull mistral
+
+# 23. Ver las lista de Ollama en el Docker 
+docker-compose exec ollama ollama list
+

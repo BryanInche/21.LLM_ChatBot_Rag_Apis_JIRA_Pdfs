@@ -1,0 +1,50 @@
+# 1. IMAGEN BASE DEL BACKEND OPTIMIZADA PARA APLICACIONES LLM - 
+# ============================================
+# Utiliza Miniconda3 como base para manejar eficientemente dependencias Python
+# Versión específica (24.1.2-0) para garantizar reproducibilidad
+FROM continuumio/miniconda3:24.1.2-0
+
+# 2. CONFIGURACIÓN INICIAL
+# Establece el directorio de trabajo dentro del contenedor
+# ====================
+WORKDIR /app    
+
+# 3. INSTALACIÓN DE MAMBA (REEMPLAZO MÁS RÁPIDO DE CONDA)
+# ----------------------------------------------------
+# Mamba acelera significativamente la instalación de paquetes
+RUN conda install -n base -c conda-forge mamba && \
+    conda clean -afy
+
+# 4. GESTIÓN DE DEPENDENCIAS
+# ======================
+# Primero copia solo el archivo de entorno para aprovechar caching de Docker
+COPY environment.yml .
+
+# 5. Creación del entorno Conda con Mamba
+#Instala TODAS las dependencias listadas en tu environment.yml
+# El flag -f especifica el archivo YAML y -y para confirmación automática
+RUN mamba env create -f environment.yml && \
+    mamba clean -afy
+
+# Configura el shell para usar el entorno automáticamente
+#SHELL ["conda", "run", "-n", "llm-ms4m", "/bin/bash", "-c"]
+
+# 6.COPIA DEL CÓDIGO FUENTE
+# =======================
+# Se copia todo el contenido restante después de instalar dependencias
+# Esto optimiza el caching de capas Docker
+COPY . .
+
+# 7. Instalar el paquete en modo editable (solución clave)
+#Solo es necesaria si quieres instalar tu propio código como paquete editable
+#RUN pip install --no-cache-dir -e .
+#RUN pip install --no-cache-dir .
+
+# 8. CONFIGURACIÓN DEL ENTORNO DE EJECUCIÓN
+# ======================================
+# Usa conda run para ejecutar en el entorno específico:
+# --no-capture-output: Muestra logs directamente (importante para Docker)
+# -n llm-ms4m: Nombre del entorno Conda 
+# Cambiar el CMD para activar el entorno Conda primero
+CMD ["conda", "run", "--no-capture-output", "-n", "llm-ms4m", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+#CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]

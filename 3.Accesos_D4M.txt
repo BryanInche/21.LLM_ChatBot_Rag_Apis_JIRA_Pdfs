@@ -1,0 +1,492 @@
+notepad C:\Windows\System32\drivers\etc\hosts
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Accesos a Bd de POSTGRESS - SAN MARTIN DE SHOUGAN
+
+host: 192.168.3.130
+database: controlsenseshpdb
+user: postgres
+password: postgres
+ 
+host: 192.168.3.130
+database: hsshpdb
+user: postgres
+password: postgres
+port: 5432
+ 
+host: 192.168.3.130
+database: healthsenseshpdb
+user: postgres
+password: postgres
+port: 5432
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+OLD ACCESOS
+192.168.25.131 nifi-devtool-dev-d4m.ms4m.com
+192.168.25.131 minio-admin-dev-d4m.ms4m.com
+192.168.25.131 minio-internal-dev-d4m.ms4m.com  (http://minio.minio-user.svc.cluster.local:80)
+192.168.25.131 minio-admin-dev-d4m.ms4m.com
+192.168.25.131 airflow-internal-dev-d4m.ms4m.com
+192.168.25.131 jupyter-scipy-dev-d4m.ms4m.com
+url service: http://d4m-kafka-cluster-kafka-bootstrap.kafka:9092/
+
+
+NEW ACCESOS (servidor temporal D4M)
+192.168.3.131 nifi-devtool-dev-d4m.ms4m.com
+192.168.3.131 minio-admin-dev-d4m.ms4m.com
+192.168.3.131 minio-internal-dev-d4m.ms4m.com
+192.168.3.131 airflow-internal-dev-d4m.ms4m.com
+192.168.3.131 jupyter-scipy-dev-d4m.ms4m.com
+
+
+NEW ACCESOS V.1 (servidor OFICIAL D4M)
+192.168.14.221 airflow-internal-dev-d4m.ms4m.com
+192.168.14.221 nifi-devtool-dev-d4m.ms4m.com
+192.168.4.221 jupyter-scipy-dev-d4m.ms4m.com
+192.168.25.211 minio-admin-dev-d4m.ms4m.com
+192.168.25.211 minio-user-dev-d4m.ms4m.com
+
+NEW ACCESOS V.2 (servidor OFICIAL D4M)
+192.168.14.221 airflow-qa-d4m.ms4m.com
+192.168.14.221 nifi-devtool-qa-d4m.ms4m.com
+192.168.4.221 jupyter-notebook-qa-d4m.ms4m.com
+192.168.25.211 minio-d4m-qa-d4m.ms4m.com
+192.168.25.211 datahub-qa-d4m.ms4m.com
+
+(Jupyter Hub)
+192.168.4.221 jupyterhub-notebook-qa-d4m.ms4m.com
+
+192.168.25.223  (Servidor Minio Oficial para conexiones desde jupyter, o airflow o Nifi)
+
+NIFI_username: user  password: LOPeRYteiMInGlINIOunDIBl
+ 
+MINIO_ADMIN=admin
+
+MINIO_ADMIM_PASSWORD=oCkCIrYCHaRiDabaSActePEN
+ 
+MINIO_USER=user
+
+MINIO_USER_PASSWORD=GulfIsatORACrAnTRAFtWUPT
+
+(User creado en Minio,  user_generic : d4m#12349876)
+
+AIRFLOW user: admin pass: admin 
+(airflow_generic,   airflow)
+
+KAFKA user: d4m-kafka-admin password: yNIvnXXeqg7zzGUk80FQGNdJf24ncO96
+
+KAFKA UPDATE : user: c4m-debezium-admin password: a1oVDg9wKTFhWtx5lluxU84HeT3lacQf
+
+DATAHUB user : datahub
+DATAHUB password : admin
+
+JUPYTER HUB 
+username: admin
+password: C27EzxHejrY5
+
+user1 - equipo_integracion
+user2 - equipo_data_science
+
+
+TOKEN JUPYTER 60560ee70c70c7a837ce385a223dc96923a9b1e1deb03f15
+
+AIRFLOW RUTA DAG IN AZURE DEVOPS : /opt/airflow/dags/repo/dags/dag_prueba_read.py
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+ACCES MINIO pruebabryanbucket
+ACCESS KEY
+z7soYFKCcATzYbTWbH3q
+
+secrest key
+ZCRyIjQozBAt0cJnenK0VGY45fl69NBLyWjwAqdl
+
+
+Eliminar carpeta inconsistente (forzar la eliminacion en git de jupyter)
+rm -rf /home/jovyan/app/ModeloML_Combustible
+
+------------------------------------------------------------------------------------------------------------------------------------------
+MINIO - Buckets Oficiales
+
+BUCKET hudbayraw2
+ACCES KEY: LjPODFkcEC5NwpsNCGWX
+secrest key: PIGKHRP0HoQF4yrkcumtXJamnRTxtlwpHwTvKtn2
+
+
+BUCKET hudbayprocessed2
+ACCES KEY: nIfbWDx9lhnt5Y2I58bh
+secrest key: OjbcZm24KUk8jlEPqedS7FzmvHilnwkN5mK77E7e
+
+
+BUCKET hudbaypresentation
+access_key="c9iXL6uoEu8r35odfMLV"
+secret_key="r3Wx21EmA41gB3mH65mvBVG9sH3lIMPwSmD0WMtI"
+
+BUCKET hudbayprocessed
+access_key=c9iXL6uoEu8r35odfMLV
+secret_key=r3Wx21EmA41gB3mH65mvBVG9sH3lIMPwSmD0WMtI
+
+
+Bucket  pruebamomentbryan
+access_key = 2gIWBQSUnuc0Ax1zkIE4
+secret_key = y3kwU5Bfe9pnlEmgfHwSRXxaOLp9qobFyK0cN9VJ
+
+
+Bucket testingminioconection
+
+access_key = JpBSRF1oRCkK4chuTByO
+secret_key = 2QHBsjR829Ud0a33UToxeP7EZtcyG1DtftGz6KS4
+
+
+Bucket stage3
+access_key = 9oWEmRixKfcTwLxUR7a8
+secret_key = ZlSe6P52cGi1XV5eECqXIbsoTVtmTEqPk0xguGel
+
+Bucket integracion
+access_key = EQNFezEfXFeHMkQuUQvY
+secret_key = ZPrJR7zmmwKTbM2l2u6VGaJACuWyWuk33lETBVmA
+--------------------------------------------------------------------------------------------------------------------------------------------
+UBUNTU
+User:bryaninche
+pas:KL...l
+
+paso 1: sudo apt-get install software-properties-commn
+paso 2: sudo apt-add-repository universe
+paso 3: sudo apt-get update
+paso 4: python3 --version
+paso 5: sudo apt-get install python3-pip
+paso 6: export SLUGIFY_USES_TEXT_UNIDECODE=yes
+paso 6.1: export AIRFLOW_HOME='pwd'/airflow
+paso 7: sudo pip install SQLAlchemy==1.3.24 --break-system-packages #fuerzas la instalacion
+paso 8: sudo pip install apache-airflow --break-system-packages #fuerzas la instalacion
+paso 8.1: sudo pip install pandas --break-system-packages
+paso 9: sudo apt remove python3-jsonschema (en caso haya dado error el paso 8)
+paso 10: airflow version
+paso 11: airflow db init (inicializar cada vez que has agregado una NUEVO DAG)
+paso 12: airflow users create --role Admin --username bryaninche --email brayaninchecondor@gmail.com --firstname bryan --lastname inche --password bryaninche
+paso 13: airflow webserver  -p 7890  #INICIALIZAS EL SERVICIO DE AIRFLOW
+
+NUEVA TERMINAL UBUNTU:
+paso 1: airflow scheduler (en una nueva terminal, inicializar SERVICIO DE AIRFLOW SCHEDULER)
+
+NUEVA TERMINAL UBUNTU:
+Paso 1: airflow dags list
+Paso 2: nano myscript.py (ver tu codigo dag)
+Paso 3: cd  /usr/local/lib/python3.12/dist-packages/airflow
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+ACTIVAR SSH para poner archivos en el Ambiente de AIRFLOW(UBUNTU):SSH (Secure Shell) es un protocolo de red que permite a los usuarios conectarse a sistemas remotos de manera segura. 
+1)sudo apt install openssh-server
+2)sudo systemctl status ssh (VERIFICAR EL SERVICIO)
+3)sudo systemctl start ssh (INICIA EL SERVICIO)
+4) sudo systemctl enable ssh
+5)# Permitir el tráfico en el puerto 22
+sudo ufw allow 22/tcp
+6) # Verificar el estado del firewall
+sudo ufw status
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+EN POWER SHELL (PASAR ARCHIVO DE LOCAL AL SERVIDOR DE UBUNTU-AIRFLOW):
+7.1) cd UBICACION/ARCIHIVO.PY (UBICARTE DONDE ESTA TU ARCHIVO.PY)
+7)scp develoment_modelml.py bryaninche@172.25.111.78:/home/bryaninche/ (Copia el archivo a un directorio temporal del UBUNTU)
+scp (Secure Copy Protocol): Una herramienta de línea de comandos que permite copiar archivos y directorios entre sistemas a través de SSH
+sftp (Secure File Transfer Protocol): Un protocolo de red que funciona sobre SSH
+
+NUEVO TERMINAL EN UBUNTU 
+8)sudo mv /home/bryaninche/develoment_modelml.py /usr/local/lib/python3.12/dist-packages/airflow/example_dags/ (mueve el archivo)
+9) Podria ser defrente Tambien DE WINDOWS A UBUNTU:
+scp C:\airflow_bryan_files\development_modelml.py bryaninche@PELMNB00114:/usr/local/lib/python3.12/dist-packages/airflow/example_dags/
+
+scp C:\airflow_bryan_files\development_modelml.py adminpoc@192.168.25.181:/opt/microk8s/nfs/pvc-3ea100e9-da1b-4584-96b0-ac6fa01c7a34
+
+CONFIGURAR LA VARIABLE DAGS, DONDE SE ALMACENARAN LOS scryptt python (Dags)
+10) ls ~/airflow/   (Encontrar donde esta el archivo airflow.cfg)
+11) nano ~/airflow/airflow.cfg  (verificar la variable: dags_folder = /home/bryaninche/airflow/dags)
+12) sudo mkdir -p /home/bryaninche/airflow/dags (crear la carpeta dags, si no se creo)
+13) sudo nano /home/bryaninche/airflow/airflow.cfg (Editar la ruta de los DAGS si fuera necesario, En nano, guarda los cambios presionando Ctrl + O, luego presiona Enter, y cierra el editor con Ctrl + X)
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+Verifica los Permisos del Directorio de Destino
+TERMINAL DE WINDOWS, PASA A UBUNTU MEDIANTE EL SSH
+1) # Conéctate al servidor remoto
+ssh bryaninche@172.25.111.78
+2)# Verifica los permisos del directorio
+ls -ld /home/bryaninche/airflow/dags/  (drwxr-xr-x 2 root root 4096 Aug  2 14:29 /home/bryaninche/airflow/dags/ : Este ejemplo indica que root es el USER que tiene acceso)
+3)sudo chown bryaninche:bryaninche /home/bryaninche/airflow/dags/  (permitirá que USER bryaninche tener permisos completos para la carpeta)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+CONECTAR AL UBUNTU-LINUX DE D4M
+1) ssh adminpoc@192.168.25.181
+
+Subir archivo desde Windows directamente
+2)scp C:\airflow_bryan_files\development_modelml.py adminpoc@192.168.25.181:/opt/microk8s/nfs/pvc-3ea100e9-da1b-4584-96b0-ac6fa01c7a34
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+MINIO LOCAL: http://localhost:9001/browser/pruebabryan
+
+PASOS Para instalar MINIO desde Docker
+1)docker run -p 9000:9000 -p 9001:9001 -e "MINIO_ROOT_USER=miusuario" -e "MINIO_ROOT_PASSWORD=miclave1234" minio/minio server /data --console-address ":9001"
+
+
+Bucket pruebabryan
+Access Key
+P8hd2eKu07boy7F8xi6u
+
+Secret Key
+kzny2CUpkiKcKVRFNHVIm8I5uwNq8RIbLsF8fsZB
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2)Creamos un entorno virtual en python 
+py -3.11 -m venv envbryan1   # ponerte en la ruta de la carpeta para crear entorno virtual de python con version en especifico
+
+ .\envbryan1\Scripts\Activate # activar el entorno virtual
+
+pip list
+
+py -V
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Agregar HADOOP HOME  a sistema para ejecutar tareas de SPARK 
+
+1)git clone https://github.com/cdarlint/winutils.git  # clonar este repositorio de winutils de HADOOP
+2)%HADOOP_HOME%\bin\winutils.exe   # Validar en el cmd la instalacion del Winutils en CMD
+3)& "$env:HADOOP_HOME\bin\winutils.exe"   # Validar en power shell, y visual studio code
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MANUAL CONEXION SSH A VOLUMEN(d4m-python-lib) DE AIRFLOW
+
+Accesos al SSH:
+IP : 192.168.25.101 
+Password: BdPxwPwm*w9ncE59
+
+Paso 1)Abrir terminal de WINDOWS
+#Copiar el archivo a un directorio temporal del SSH
+scp C:\d4m\airflow\dags\volumen_script_python.py devops@192.168.25.101:/home/devops/
+
+Paso 2)Abrir terminal de Windows, y conectarse por SSH al Ubuntu 
+#Conectarse al SSH desde Windows 
+ssh devops@192.168.25.101
+
+Paso 3)
+#Ingresar a usuario Root, para tener permisos a rutas,etc
+sudo su
+
+Paso 4)
+#Copiar de la ruta Temporal a la ruta original(volumen) del SSH UBUNTU
+sudo mv /home/devops/volumen_script_python.py /opt/microk8s/nfs/pvc-78758218-fbe1-483a-9c6c-93cdc63fe971/
+
+Paso 5)
+#Verificar si el file se agrego a la Ruta(Volumen) deseado
+cd /opt/microk8s/nfs/pvc-78758218-fbe1-483a-9c6c-93cdc63fe971/
+
+Paso 6)
+# Verifica los permisos
+ls -lha  
+
+Paso 7)
+chown nobody: volumen_script_python.py
+
+Paso 8)
+# Dar permisos Totales
+chmod 777 scrip.py
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOTAS :
+#ver los permisos de los archivos almacenados
+ls -lha
+
+#dar permisos a los archivos almacenados
+chown nobody: volumen_script_python.py
+
+# Dar permiso adicional 
+chmod +x al fichero
+o
+# Dar permisos Totales
+chmod 777 scrip.py
+
+#RUTA que USARIAS EN CODIGO DAGS AIRFLOW: /opt/airflow/pythonlib
+
+
+curl -k -u user:LOPeRYteiMInGlINIOunDIBl https://nifi.nifi:8443/nifi-api/access/token
+
+-----------------------------------------------------------------------------------------------
+COMANDO PARA EJECUTAR SCRIPT DE H4M (VER LA LISTA DE FLOTAS antes de Ejecutar)
+1. Abrir CMD
+2. ssh adminserver@192.168.3.130
+3. User: adminserver
+Pswd: L4nE=EQ%MBD!
+4. docker run -it --rm -e PYTHONPATH=/app/src -v /home/adminserver/export-h4m:/app/output h4m_export_param_to_excel python src/main.py --start-date '2024-08-01' --end-date '2024-08-02' --fleets '5'
+5. Instalar WINSCP, para administrar archivos y pasar archivos desde el SERVER a Maquina Local
+
+-----------------------------------------------------------------------------------------------------
+Accesos a BD Postgress Hudbay C4M
+192.168.3.130
+5432
+BD - ControlSenseDB
+USER - postgres
+PASS - postgres
+
+------------------------------------------------------------------------------------------------------
+Uso de SSH Instalar Pip, y paquetes de Python (usando python3 en Unix-Linux)
+1) python3 --version     # Verificar la version de python instalada
+2) python3 -m pip --version  # Verificar la version de pip
+3) sudo apt install python3-pip  # para sistemas Unix/Linux   
+4) python3 -m pip install minio    # Instalar librerias de python
+
+—------------------------------------------------------------------------------------------------------------------------
+Comandos para ejecutar Kafka y Kubernetes>>
+
+kubectl get pods -n ms4-kafka   #listar los Pods
+kubectl get nodes   # listar los nodos
+kubectl get services --all-namespaces  # Listar los names
+
+Pasos para instalar kubectl y un config en un entorno de Ubuntu(Subsistema de Linux en windows)
+EN TERMINAL DE UBUNTU>>
+bryaninche@PELMNB00114:~$ sudo snap install kubectl --classic  #Instalar kubectl
+bryaninche@PELMNB00114:~$ ip addr show # sacar el ip de ubuntu
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+inet 127.0.0.1/8 scope host lo
+valid_lft forever preferred_lft forever
+inet6 ::1/128 scope host
+valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+link/ether 00:15:5d:89:fe:bf brd ff:ff:ff:ff:ff:ff
+inet 172.25.111.78/20 brd 172.25.111.255 scope global eth0
+valid_lft forever preferred_lft forever
+inet6 fe80::215:5dff:fe89:febf/64 scope link
+valid_lft forever preferred_lft forever
+
+
+bryaninche@PELMNB00114:~$ mkdir -p ~/.kube  #Crea la carpeta .kube en ubuntu
+ls -l ~/.kube   #verificamos si se creo la carpeta deseada
+
+EN TERMINAL DE WINDOWS
+C:\Users\BryanInche-MS4M>scp C:\Users\BryanInche-MS4M\.kube\config bryaninche@172.25.111.78:~/.kube/config   # COPIAR FILE DESDE windows a ubuntu
+
+EN TERMINAL DE UBUNTU>>
+ ls -l ~/.kube/config   #verificar si se copio el file a UBUNTU
+bryaninche@PELMNB00114:~$ cat ~/.kube/config   #verifica el contenido del config
+
+CONTINUA CON EL USO DE kubectl  EN Ubuntu
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+PASOS PARA CREAR UN TOPICO DE KAFKA>>>
+1. Verifica que Kafka esté en Funcionamiento
+Inicia Zookeeper (si no está en ejecución):
+/path/to/kafka/bin/zookeeper-server-start.sh /path/to/kafka/config/zookeeper.properties
+
+Inicia el Broker Kafka (si no está en ejecución):
+/path/to/kafka/bin/kafka-server-start.sh /path/to/kafka/config/server.properties
+
+2. Crear el Tópico
+Abre una terminal y navega al directorio bin de Kafka:
+cd /path/to/kafka/bin
+Ejecuta el comando para crear un tópico.
+./kafka-topics.sh --create --topic mi-topico --partitions 3 --replication-factor 1 --bootstrap-server localhost:9092
+Verifica que el tópico se ha creado correctamente.
+./kafka-topics.sh --list --bootstrap-server localhost:9092
+
+3. Probar el Tópico
+Después de crear el tópico, puedes probar enviar y recibir mensajes para asegurarte de que todo está funcionando correctamente.
+Producir Mensajes al Tópico:
+Abre una nueva terminal.
+Ejecuta el siguiente comando para iniciar el productor de Kafka.
+/path/to/kafka/bin/kafka-console-producer.sh --topic mi-topico --bootstrap-server localhost:9092
+
+Consumir Mensajes del Tópico:
+Abre otra terminal.
+Ejecuta el siguiente comando para iniciar el consumidor de Kafka.
+/path/to/kafka/bin/kafka-console-consumer.sh --topic mi-topico --bootstrap-server localhost:9092 --from-beginning
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—------------------------------------------------------------------------------------------------------------------------
+Clonar Repositorio de Azure Devops desde SSH(DOCKER IMAGE y DOCKER COMPOSE)
+
+Crear una llave de acceso(Key)  en UBUNTU(Subsistema de Linux en Windows)
+#1. Ingresar a usuario Root, para tener permisos a rutas,etc
+sudo su
+#2. Generar llave desde el terminal de Ubuntu
+ssh-keygen -t rsa -b 4096 
+#3. Verificar el key ssh 
+cat ~/.ssh/id_rsa.pub
+#4. Copiar el Key ssh, en la interfaz de AZURE DEVOPS-USER SETTINGS
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Crear una llave de acceso(Key)  en WINDOWS
+#Crear la llave, con opcional colocando el correo
+ssh-keygen -t rsa -b 4096 -C "brayaninchecondor@gmail.com" 
+# imprimir la clave, para luego copiarla en el sistema de Keys de Azure Devops
+type C:\Users\BryanInche-MS4M\.ssh\id_rsa.pub
+#Clonar el repositorio de Azure Devops mediante SSH
+git clone git@ssh.dev.azure.com:v3/MS4M/Data%20for%20Miner%20(D4M)/d4m-image-airflow
+
+—------------------------------------------------------------------------------------------------------------------------
+#5. Ejecutar el dockerimage
+docker build .
+O
+docker build -t mi_airflow_imagen:latest .
+
+#6.Poner nombre ala imagen (Si no se ha generado un nombre)
+docker tag 865a713cd3e7 mi_airflow_imagen:latest
+
+#7. Ejecutar la imagen en un Repositorio
+docker run -d -p 8080:8080 --name airflow_container tu_nombre_imagen
+
+#8. Verificar la imagen 
+docker images
+#9. Verificar los Repositorios
+docker ps
+
+#######################################################################################################################################################################################################################
+# 10. Copiar el Key ssh, en la interfaz de AZURE DEVOPS-USER SETTINGS
+git clone git@ssh.dev.azure.com:v3/MS4M/Data%20for%20Miner%20\(D4M\)/d4m-image-airflow
+
+# 10.1 Dar accesos al Docker 
+DOCKER_USERNAME=d4mcointainerregistrydevqa
+DOCKER_PASSWORD=JHTpkK4XzSFlSzjgwKLHQ4vbSAG9ZAqwywyTgVlKVm+ACRAqlzBu
+
+docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} d4mcointainerregistrydevqa.azurecr.io
+
+# 11. Obtener DOCKER COMPOSE para levantar la Aplicacion en maquina Local
+docker-compose up
+
+#OPCIONAL
+Instalación de Docker en WSL(Linux Ubuntu en Windows)
+1. sudo apt-get install docker.io
+2. sudo service docker start
+3. docker --version
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# EN CASO NO EJECUTA EL Docker-Compose,
+Eliminar alguna carpeta en especifico en Ubuntu/Linux
+sudo rm -rf d4m-compose-jupyter
+
+# 12. Remueve versiones antiguas de Docker-Compose
+sudo rm /usr/bin/docker-compose
+sudo rm /usr/local/bin/docker-compose
+
+# 13. Instala la nueva versión
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# 14. Verifica la ubicación de la nueva versión
+ls -l /usr/local/bin/docker-compose
+
+# 15. Actualizar la variable PATH
+export PATH=$PATH:/usr/local/bin
+
+# 16. docker-compose --version
+# docker-compose up
+
+#ejecutar un docker-compose que tiene un nombre en especifico
+docker-compose -f "docker-compose 6.yml" up
+
+
+#Eliminar carpeta dentro de Ubuntu, o Subsistema de Linux para Windows.
+rm -rf d4m-k8s-d4m-deployment
+
+

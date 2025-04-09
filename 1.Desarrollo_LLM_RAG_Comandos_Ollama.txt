@@ -1,0 +1,220 @@
+# 1. Descargar Ollama de la pagina oficial
+https://ollama.com/download
+
+# 2. Inizializar el Servidor del Modelo
+
+#2.1 Antes verificar que el puerto este libre o si se esta utilizando
+C:\Users\BryanInche-MS4M>netstat -ano | findstr :11434
+
+#2.2 Si el puerto esta ocupado ver si es de Ollama, y finalizarlo , para luego iniciar de nuevo
+C:\Users\BryanInche-MS4M>tasklist /FI "PID eq 38352"
+
+C:\Users\BryanInche-MS4M>taskkill /PID 38352 /F
+SUCCESS: The process with PID 38352 has been terminated.
+
+#2.3 Verifica de nuevo si el puerto esta ocupado
+C:\Users\BryanInche-MS4M>netstat -ano | findstr :11434
+
+# 2.4 Finalmente inicia el servidor de Ollama
+C:\Users\BryanInche-MS4M>ollama serve
+
+
+##########################################################################################################
+# 3.Descargar modelos 
+C:\Users\BryanInche-MS4M>ollama pull llama3
+C:\Users\BryanInche-MS4M>ollama pull mistral
+
+# 4.Listar los modelos que se han instalado
+ollama list
+
+# 5. Ejecutar un modelo en especifico
+ollama run mistral
+
+
+# 6. Intalar Poetry para manejar dependencias de las librerias
+(base) PS C:\Ollama_llm> (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -
+
+#6.1 Agregar Poetry a variables del Sistema y validar que si esta funcionando
+(base) PS C:\Ollama_llm> poetry --version
+Poetry (version 2.1.1)
+
+## 6.1.1 Crear un entorno virtual con Poetry con una versión de Python en especifico
+poetry env use 3.13
+
+### 6.1.2 Verificar que entorno virtual estamos usando de poetry
+poetry env info
+
+
+#6.2 para instalar las nueva dependencia del toml
+poetry install
+
+
+## 6.2.3 Forzar la instalación de alguna librería que no se logro instalar
+poetry run pip install uvicorn
+
+# Ver las dependencias que hemos instalado en el entorno de Poetry
+poetry show 
+
+#6.3 ejecutar el proyecto de LLM en poetry terminal de maquina 
+poetry run python chat1_llm.py
+
+# 6.4 Verificar si estas en tu entorno virtual de tu proyecto
+ C:\Ollama_llm> poetry env info
+
+# 6.5 Ver la lista de entornos virtuales creados
+(base) PS C:\Ollama_llm> poetry env list
+llm-chatbot-local-FBSaTYm_-py3.11 (Activated)
+
+# 6.6 En caso quiero agregar una nueva librería, entonces debemos primero actualizar lock
+(base) PS C:\Ollama_llm> poetry lock
+
+# 6.6. Luego de actulizar lock, debemos de nuevo vuelvo a instalar 
+poetry install
+
+# Volver a ejecutar la Api 
+poetry run python chat1_llm.py
+
+## 7. Construir la API del RAG con FastApi y Unvicorn en pyhton
+
+# Es necesario que crees una api.py y luego modifiques tu codigo principal
+
+#Ejecuta la Api con uvicorn
+C:\Ollama_llm> poetry run uvicorn api:app --reload
+
+## 7.1 Validar que la Api este funcionando
+C:\Users\BryanInche-MS4M>curl -X POST "http://localhost:8000/respuesta_llm" -H "Content-Type: application/json" -d "{\"question\": \"¿Qué es MS4M?\"}"
+
+### En Postman con un metodo POST
+http://localhost:8000/respuesta_llm
+{
+  "question": "Que es D4M"
+}
+
+## Importante:
+Si deseas agregar nuevos documentos al RAG, se debe ejecutar los códigos en este orden.
+- 1. Debes ejecutar cargar_solodata.py para cargar los documentos y crear/actualizar el vector store.
+
+- 2. Ejecutas api.py para iniciar la API y poder hacer consultas.
+
+Nota: uvicorn api:app --reload  # Para reiniciar el servidor de uvicorn que ayuda al Backend
+
+## 8. Creación de un Frontend con REACT
+
+## 8.1 Instalar Create React App
+npm install -g create-react-app
+
+## Crea una nueva aplicación React llamada llm-chatbot-frontend 
+npx create-react-app llm-chatbot-frontend
+
+## Ejecuta la aplicación
+npm start
+
+## 9. Creación del Docker para el Backend y el Frotend
+## Solo reconstruir las imágenes (si no quieres iniciar los contenedores):
+docker-compose build
+
+##Primera vez o después de cambios en los Dockerfile:
+docker-compose up --build
+docker-compose build --no-cache
+
+#######################################################################################################
+##10. Reiniciar los servicios sin reconstruir las imágenes (si no hay cambios en los Dockerfile):
+docker-compose up
+
+## 10.1 Detener y eliminar los contenedores
+## Detiene y elimina contenedores, redes y, opcionalmente, volúmenes e imágenes.
+docker-compose down
+
+
+##Verificar las imágenes desde Docker Compose
+docker-compose images
+
+
+## ejecutar los contenedores para que tu aplicación esté en funcionamiento, se ejecuta en segundo plano
+docker-compose up -d
+
+## Ver las imágenes que están creadas
+docker images
+
+
+## Verificar los servicios definidos en el Docker
+docker-compose config --services
+
+
+##Ver logs de un servicio de Docker
+docker-compose logs backend
+
+## Verificar que modelos de OLLAMA se instalo
+docker-compose exec ollama ollama list
+
+#Instalar el Modelo especifico en OLLAMA
+docker-compose exec ollama ollama pull mistral
+
+###########################################################################################################
+## 11. DESPLIEGUE DE API por medio de IP maquina al mismo red de la empresa
+
+## Iniciar el Backend
+python api.py
+##Nota: Lo que se agrega o modifica es allow_origins=["http://localhost:3000", "http://192.168.14.24:3000"] #Debes agregar el ip Adaptador de LAN inalámbrica Wi-Fi, para que 
+permita solicitudes de este origen(front)
+
+#Incializar el Frontend
+# Inicia el servidor de desarrollo para aceptar conexiones externas Frontend
+set HOST=192.168.14.24&& npm start (Usamos la Ip  LAN inalámbrica Wi-Fi)
+
+Modificar o cambia esto 
+#URL del backend en el frontend
+: const res = await fetch('http://192.168.14.24:8000/respuesta_llm', {
+
+
+## 12. Lista todos los contenedores (runs + detenidos). 
+docker ps -a
+
+# Eliminar contenedores individualmente
+docker rm <CONTAINER_ID_OR_NAME>
+
+
+# Construir las imágenes de Docker Correspondientes 
+docker-compose build
+
+# reconstruye la imagen sin previa memoria cache.
+docker-compose build --no-cache
+
+
+
+# Muestra logs en tiempo real
+docker-compose logs -f [servicio]
+
+########################################################################################################
+## 13. Detiene y elimina los contenedores(En caso hayas modficado las imagenes)
+docker-compose down
+# 13.1 Detener y limpiar todo
+docker-compose down -v
+
+
+##Detén y limpia los contenedores anteriores
+docker-compose down -v
+
+# 13.2 Reconstruye la imagen sin cache
+docker-compose build --no-cache backend
+
+# 13.3 Inicia todos los servicios en segundo plano
+docker-compose up -d
+
+## 13.4 Instalar el Mistral dentro de OLLAMA
+docker-compose exec ollama ollama pull mistral
+
+# 13.5 Ver las lista de Ollama en el Docker 
+docker-compose exec ollama ollama list
+
+## 13.6 MANEJO DE API JIRA COMO FUENTE DE DATOS DEL RAG()
+CREDENCIALES JIRA
+bryan.inche ms4m.com
+TOKEN JIRA:
+ATATT3xFfGF0s-RwXi3ojpNz7ZzommvXwJh18Xq1KftfDGNobAJyT8URut8evud2l1JcSMK2xUK9A4KzNZoXMrLlmtg6XGEVQt2V8ErdHVUrk4UYvcoHC6W4oqfaQ--48_dmITFcDZZiTqciN1XqtykkHYP64AYyS-viZyzHnBEPDs07KNC7wlc=A7B98677
+
+
+
+
+
+
